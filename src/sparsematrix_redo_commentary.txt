@@ -1,0 +1,34 @@
+--Describe your matrix implementation
+We used an ArrayList that stores objects to implement our sparse matrix. Each index in the ArrayList holds an object called Index. Index has
+data values row, column, and data. This converts a 2D array into a 1D array by storing it's row and column values; thus our ArrayList holds all of the essential information needed for a matrix. We traverse the indices of the ArrayList to access the Index object stored at each "slot" of the ArrayList; we can access the row, column, and data value. 
+
+--Why did you choose the implementation you did?
+The ArrayList can be dynamically sized, so we would maintain the sparse matrix requirements by not allocating 0 or null values space in memory. 
+Thus, if we created a 5x5 matrix but only put 8 numbers in it, our ArrayList would only hold 8 spots in memory instead of 25.
+We considered using a singly linked list, but we realized that the user could fill in the matrix out of order which would link the nodes out of order.
+The user can add something to row 3 column 2 first and then add something to row 0 column 1. The unsorted nature of the linked list would later cause
+issues with toString(). We decided that taking care of the unsorted nature of the ArrayList was more manageable.   
+There were also convenient features of an ArrayList such as clear and size() that we utilized quite a lot. We didn't need to have a counter for the
+number of nodes we added. Also, storing all relevant information in an easy to access object made our implementation easier too.
+   
+--What is the computational complexity of the operations in your matrix implementation?
+ * clear() is O(1) since the ArrayList library function does it for us
+
+ * setSize() is O(1) because we just set the number of rows and columns to a number. This happens in constant time; we don't need to iterate through anything.
+
+ * getNumRows() is O(1) because it just simply returns the number of rows in the current matrix. There are no traversals. It happens in constant time.
+
+ * getNumCols() is O(1) for the same reasoning as getNumRows(). It just returns the number of columns in the current matrix without iterating or traversing through anything.
+
+ * addElement() is O(n) because in the worst case we need to iterate through the whole ArrayList to find the specified row and column pair to add our element.
+
+ * removeElement() is O(n) because in the worst case we need to iterate through the whole ArrayList to find the specified row and column pair to remove the element at that spot.
+
+ * getElement() is O(n) because in the worst case we need to iterate through the whole ArrayList to find the specified row and column pair to return that element at that spot.
+
+ * toString() is O(n^3) because we have a triple nested for loop that is searching through all n elements of an ArrayList to find all the values in order. At worst there's n rows, n columns, and n indices to search through. 
+
+ * addMatrices() is O(n^2) because we have a double nested for loop that is going through every row and column pair in the matrix to add the two matrices together. At worst here's n rows and n columns.
+
+ * multiplyMatrices() is O(n^3) because we have a triple texted for loop that is iterating through all of the rows and columns and then the corresponding values. At worst there will be n rows, n columns, and n corresponding values. 
+ 
